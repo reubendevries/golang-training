@@ -1,18 +1,24 @@
 package main
 
-import "log"
+import (
+	"log"
+	"time"
+)
 
-func main() {
-	var myString string
-	myString = "Green"
-
-	log.Println("myString is set to", myString)
-	changeUsingPointer(&myString)
-	log.Println("after func call myString is set to", myString)
+type User struct {
+	FirstName   string
+	LastName    string
+	PhoneNumber string
+	Age         int
+	BirthDate   time.Time
 }
 
-func changeUsingPointer(s *string) {
-	log.Println("s is set to", s)
-	newValue := "Red"
-	*s = newValue
+func main() {
+	user := User{
+		FirstName:   "Reuben",
+		LastName:    "deVries",
+		PhoneNumber: "1 555 555-1212",
+	}
+
+	log.Println(user.FirstName, user.LastName, "Birthdate:", user.BirthDate)
 }
