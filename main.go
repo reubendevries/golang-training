@@ -52,4 +52,5 @@ func (d Gorilla) NumberOfLegs() int {
 
 func PrintInfo(a animal) {
 	log.Println("This Animal says", a.Says(), "and has", a.NumberOfLegs(), "legs")
+
 }
