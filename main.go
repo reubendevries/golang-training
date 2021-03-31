@@ -2,26 +2,54 @@ package main
 
 import "log"
 
-func main() {
-	var whatToSay string
-	var saySomethingElse string
-	var i int
-
-	whatToSay, _ = saySomething("Hello")
-
-	log.Println(whatToSay)
-
-	saySomethingElse, _ = saySomething("Goodbye")
-
-	log.Println(saySomethingElse)
-
-	log.Println(saySomething("Finally"))
-
-	i = 7
-	i = 8
-	log.Println(i)
+type animal interface {
+	Says() string
+	NumberOfLegs() int
 }
 
-func saySomething(s string) (string, string) {
-	return s, "world"
+type Dog struct {
+	Name  string
+	Breed string
+}
+
+type Gorilla struct {
+	Name          string
+	Color         string
+	NumberOfTeeth int
+}
+
+func main() {
+	dog := Dog{
+		Name:  "Samson",
+		Breed: "German Shepherd",
+	}
+	PrintInfo(dog)
+
+	gorilla := Gorilla{
+		Name:          "King Kong",
+		Color:         "Black",
+		NumberOfTeeth: 32,
+	}
+
+	PrintInfo(gorilla)
+}
+
+func (d Dog) Says() string {
+	return "woof"
+}
+
+func (d Dog) NumberOfLegs() int {
+	return 4
+}
+
+func (d Gorilla) Says() string {
+	return "grunt"
+}
+
+func (d Gorilla) NumberOfLegs() int {
+	return 2
+}
+
+func PrintInfo(a animal) {
+	log.Println("This Animal says", a.Says(), "and has", a.NumberOfLegs(), "legs")
 }
