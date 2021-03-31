@@ -18,5 +18,3 @@ func main() {
 	default:
 		log.Println("myVar is set to something else")
 	}
-
-}
