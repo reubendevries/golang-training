@@ -2,25 +2,55 @@ package main
 
 import "log"
 
-type User struct {
-	FirstName string
-	LastName  string
+type animal interface {
+	Says() string
+	NumberOfLegs() int
+}
+
+type Dog struct {
+	Name  string
+	Breed string
+}
+
+type Gorilla struct {
+	Name          string
+	Color         string
+	NumberOfTeeth int
 }
 
 func main() {
-	var mySlice []User
-
-	u1 := User{
-		FirstName: "Trevor",
+	dog := Dog{
+		Name:  "Samson",
+		Breed: "German Shepherd",
 	}
-	u2 := User{
-		FirstName: "Sam",
+	PrintInfo(dog)
+
+	gorilla := Gorilla{
+		Name:          "King Kong",
+		Color:         "Black",
+		NumberOfTeeth: 32,
 	}
 
-	mySlice = append(mySlice, u1)
-	mySlice = append(mySlice, u2)
+	PrintInfo(gorilla)
+}
 
-	for i, x := range mySlice {
-		log.Println(i, x.FirstName)
-	}
+func (d Dog) Says() string {
+	return "woof"
+}
+
+func (d Dog) NumberOfLegs() int {
+	return 4
+}
+
+func (d Gorilla) Says() string {
+	return "grunt"
+}
+
+func (d Gorilla) NumberOfLegs() int {
+	return 2
+}
+
+func PrintInfo(a animal) {
+	log.Println("This Animal says", a.Says(), "and has", a.NumberOfLegs(), "legs")
+
 }
