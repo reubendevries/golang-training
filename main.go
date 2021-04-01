@@ -6,12 +6,19 @@ import (
 	"github.com/reubendevries/myniceprogram/helpers"
 )
 
+const numPool = 10
+
+func CalculateValue(intchan chan int) {
+	randomNumber := helpers.RandomNumber(numPool)
+	intchan <- randomNumber
+}
+
 func main() {
-	log.Println("Hello")
+	intChan := make(chan int)
+	defer close(intChan)
 
-	var myVar helpers.SomeType
+	go CalculateValue(intChan)
 
-	myVar.TypeName = "Some Name"
-
-	log.Println(myVar.TypeName)
+	num := <-intChan
+	log.Println(num)
 }
