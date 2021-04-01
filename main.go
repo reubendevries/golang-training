@@ -1,56 +1,17 @@
 package main
 
-import "log"
+import (
+	"log"
 
-type animal interface {
-	Says() string
-	NumberOfLegs() int
-}
-
-type Dog struct {
-	Name  string
-	Breed string
-}
-
-type Gorilla struct {
-	Name          string
-	Color         string
-	NumberOfTeeth int
-}
+	"github.com/reubendevries/myniceprogram/helpers"
+)
 
 func main() {
-	dog := Dog{
-		Name:  "Samson",
-		Breed: "German Shepherd",
-	}
-	PrintInfo(dog)
+	log.Println("Hello")
 
-	gorilla := Gorilla{
-		Name:          "King Kong",
-		Color:         "Black",
-		NumberOfTeeth: 32,
-	}
+	var myVar helpers.SomeType
 
-	PrintInfo(gorilla)
-}
+	myVar.TypeName = "Some Name"
 
-func (d Dog) Says() string {
-	return "woof"
-}
-
-func (d Dog) NumberOfLegs() int {
-	return 4
-}
-
-func (d Gorilla) Says() string {
-	return "grunt"
-}
-
-func (d Gorilla) NumberOfLegs() int {
-	return 2
-}
-
-func PrintInfo(a animal) {
-	log.Println("This Animal says", a.Says(), "and has", a.NumberOfLegs(), "legs")
-
+	log.Println(myVar.TypeName)
 }
