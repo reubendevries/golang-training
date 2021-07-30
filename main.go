@@ -27,7 +27,7 @@ func main() {
 	user.Age = readInteger("What is your age?")
 	user.FavouriteNumber = readFloat("What is your favourite number")
 	user.OwnsADog = readBool("Do you own a dog?")
-	fmt.Printf("Your name is %s. You're %d years old, your favourite number is %f\n and you own a dog %b", user.UserName, user.Age, user.FavouriteNumber, user.OwnsADog)
+	fmt.Printf("Your name is %s. You're %d years old, your favourite number is %f\n and you own a dog: %t", user.UserName, user.Age, user.FavouriteNumber, user.OwnsADog)
 }
 
 func prompt() {
@@ -92,18 +92,16 @@ func readBool(s string) bool {
 			_ = keyboard.Close()
 		}()
 
-		userInput, _ := reader.ReadString('\n')
-		userInput = strings.TrimSpace(userInput)
-
-		answer, err := strconv.ParseBool(userInput)
+		char, _, err := keyboard.GetSingleKey()
 		if err != nil {
-			println("Please enter in a number.")
-		} else {
-			if userInput == 'y' || userInput == 'Y' {
-				return answer == true
-			} else {
-				return answer == false
-			}
+			log.Fatal(err)
+		}
+		if strings.ToLower(string(char)) != "y" || strings.ToLower(string(char)) != "n" {
+			fmt.Println("Please select either Y or N")
+		} else if char == 'y' || char == 'Y' {
+			return true
+		} else if char == 'n' || char == 'Y' {
+			return false
 		}
 	}
 }
