@@ -3,9 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/eiannone/keyboard"
 )
 
 var reader *bufio.Reader
@@ -79,6 +82,15 @@ func readBool(s string) bool {
 	for {
 		fmt.Println(s)
 		prompt()
+
+		err := keyboard.Open()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer func() {
+			_ = keyboard.Close()
+		}()
 
 		userInput, _ := reader.ReadString('\n')
 		userInput = strings.TrimSpace(userInput)
