@@ -20,7 +20,7 @@ const (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	playerChoice := ""
-	playerValue := -1
+
 	computerValue := rand.Intn(2)
 
 	reader := bufio.NewReader(os.Stdin)
@@ -31,21 +31,11 @@ func main() {
 	playerChoice, _ = reader.ReadString('\n')
 	playerChoice = strings.TrimSpace(playerChoice)
 
-	if playerChoice == "rock" {
-		playerValue = ROCK
-	}
-
-	if playerChoice == "paper" {
-		playerValue = PAPER
-	}
-
-	if playerChoice == "scissors" {
-		playerValue = SCISSORS
-	}
+	playerValue := playersChoice(playerChoice)
 
 	fmt.Println()
-	fmt.Println("player chose", playerChoice, "and value is", playerValue)
-	fmt.Println("Computer chose", computerValue)
+	fmt.Println("You have chosen: ", playerChoice, "and value is: ", playerValue)
+	fmt.Println("Computer has chosen: ", computerValue)
 
 }
 
@@ -62,4 +52,17 @@ func clearScreen() {
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 	}
+}
+
+func playersChoice(str string) int {
+	playerValue := -1
+
+	if str == "rock" {
+		playerValue = ROCK
+	} else if str == "paper" {
+		playerValue = PAPER
+	} else {
+		playerValue = SCISSORS
+	}
+	return playerValue
 }
